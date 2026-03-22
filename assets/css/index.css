@@ -1,0 +1,394 @@
+
+
+/*-----------------------------------*\
+  #HERO (nuevo, sin slider)
+\*-----------------------------------*/
+
+.hero-home{
+  position: relative;
+  min-height: 100vh;
+  padding-block: 120px 70px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hero-home .hero-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-home .hero-bg::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: hsla(37, 100%, 97%, 0.85);
+  z-index: 1;
+}
+
+.hero-home .hero-bg-img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 420ms ease;
+  will-change: opacity;
+}
+
+.hero-home [data-hero-bg-active]{
+  opacity: 1;
+}
+
+.hero-home [data-hero-bg-next].is-visible{
+  opacity: 1;
+}
+
+.hero-inner{
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 38px;
+  width: 100%;
+}
+
+/* Intro */
+.hero-intro{
+  max-width: 560px;
+}
+
+.hero-title{
+  line-height: var(--lineHeight-1);
+}
+
+.hero-subtitle{
+  margin-top: 14px;
+  max-width: 58ch;
+  font-size: var(--fontSize-body-1);
+}
+
+/* Links/cards */
+.hero-links{
+  display: grid;
+  gap: 34px;
+}
+
+.hero-card{
+  max-width: 520px;
+}
+
+.hero-card-title{
+  margin-bottom: 10px;
+}
+
+.hero-card-text{
+  margin-bottom: 14px;
+  color: var(--davys-grey);
+}
+
+/* Botón negro simple (como en tu Figma) */
+.hero-btn {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  padding: 0 0 var(--action-underline-offset) 0;
+  background: none;
+  color: var(--action-color);
+  font-size: var(--action-font-size);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--action-letter-spacing);
+  line-height: 1.2;
+  max-width: max-content;
+  transition: color var(--transition-1);
+}
+
+.hero-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--action-underline-weight);
+  background-image: repeating-linear-gradient(
+    to right,
+    currentColor 0,
+    currentColor var(--action-stitch-dot),
+    transparent var(--action-stitch-dot),
+    transparent calc(var(--action-stitch-dot) + var(--action-stitch-gap))
+  );
+  background-repeat: repeat-x;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: stitchReveal var(--action-stitch-speed) steps(var(--action-stitch-steps)) infinite alternate;
+  opacity: 0.95;
+}
+
+.hero-btn:is(:hover, :focus-visible) {
+  color: var(--action-color-hover);
+}
+
+.hero-btn:focus-visible {
+  outline: none;
+}
+
+/*-----------------------------------*\
+  #HERO - Responsive
+\*-----------------------------------*/
+
+@media (min-width: 768px){
+  .hero-inner{
+    gap: 44px;
+  }
+
+  .hero-links{
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
+    row-gap: 40px;
+    align-items: stretch;
+  }
+
+  .hero-card{
+    max-width: unset;
+  }
+
+  
+}
+
+@media (min-width: 1200px){
+  .hero-links{
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 44px;
+  }
+
+  .hero-intro{
+    max-width: 640px;
+  }
+
+  
+  
+}
+
+/*-----------------------------------*\
+  #ABOUT HOME
+\*-----------------------------------*/
+
+.about-home{
+  background-color: var(--primario);
+}
+
+.about-home-grid{
+  display: grid;
+  grid-template-areas:
+    "media"
+    "copy";
+}
+
+.about-home-media{
+  grid-area: media;
+  margin: 0;
+  margin-inline: calc(var(--gutter) * -1);
+}
+
+.about-home-img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-home-copy{
+  grid-area: copy;
+  padding-block: 32px 0;
+}
+
+.about-home-title{
+  margin-block-end: 18px;
+}
+
+.about-home-text{
+  max-width: 62ch;
+}
+
+.about-home-text + .about-home-text{
+  margin-block-start: 20px;
+}
+
+.about-home-link{
+  margin-block-start: 24px;
+}
+
+
+/*-----------------------------------*\
+  #ABOUT HOME - tablet
+\*-----------------------------------*/
+
+@media (min-width: 768px){
+
+  .about-home-copy{
+    padding-block: 40px 0;
+
+    /* AQUÍ regulas qué tan angosto queda el texto en tablet */
+    max-width: 78%;
+  }
+}
+
+
+/*-----------------------------------*\
+  #ABOUT HOME - desktop
+\*-----------------------------------*/
+
+@media (min-width: 1200px){
+
+  .about-home{
+    padding-block: var(--section-space);
+  }
+
+  .about-home-grid{
+    grid-template-areas: "copy media";
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: calc(var(--site-gap) * 2);
+  }
+
+  .about-home-media{
+    margin-inline: 0;
+  }
+
+  .about-home-copy{
+    max-width: none;
+    padding-block: 0;
+  }
+
+  .about-home-text{
+    max-width: 60ch;
+  }
+}
+
+
+/*-----------------------------------*\
+  #MEDIA SWAP (reutilizable)
+\*-----------------------------------*/
+
+.media-swap{
+  display: grid;
+  overflow: hidden;
+}
+
+.media-swap > *{
+  grid-area: 1 / 1;
+}
+
+.media-swap-base,
+.media-swap-hover{
+  display: block;
+  width: 100%;
+  height: auto;
+  transition:
+    opacity var(--transition-2),
+    transform var(--transition-2);
+}
+
+.media-swap-hover{
+  opacity: 0;
+}
+
+.media-swap-trigger:is(:hover, :focus-visible, :focus-within) .media-swap-base,
+.media-swap-trigger:is(:hover, :focus-visible, :focus-within) .media-swap-hover{
+  transform: scale(1.04);
+}
+
+.media-swap-trigger:is(:hover, :focus-visible, :focus-within) .media-swap-hover{
+  opacity: 1;
+}
+
+
+/*-----------------------------------*\
+  #ABOUT - hover imagen
+\*-----------------------------------*/
+
+.about-home-media{
+  overflow: hidden;
+}
+
+
+/*-----------------------------------*\
+  #EXPLORE HOME
+\*-----------------------------------*/
+
+.explore-home{
+  padding-block: var(--section-space);
+  background-color: var(--primario);
+}
+
+.explore-home-title{
+  margin-block-end: 22px;
+}
+
+.explore-home-grid{
+  display: grid;
+  gap: 28px;
+}
+
+.explore-home-item{
+  width: 100%;
+}
+
+.explore-card{
+  display: block;
+  width: 100%;
+}
+
+.explore-card-media{
+  margin: 0;
+  overflow: hidden;
+}
+
+.explore-card-img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.explore-card-title{
+  margin-top: 14px;
+  color: var(--davys-grey);
+  transition: color var(--transition-1);
+}
+
+.explore-card:is(:hover, :focus-visible) .explore-card-title{
+  color: var(--primario2);
+}
+
+.explore-card:focus-visible{
+  outline: none;
+}
+
+
+/*-----------------------------------*\
+  #EXPLORE HOME - tablet
+\*-----------------------------------*/
+
+@media (min-width: 768px){
+
+  .explore-home-grid{
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--site-gap);
+    row-gap: 34px;
+  }
+}
+
+
+/*-----------------------------------*\
+  #EXPLORE HOME - desktop
+\*-----------------------------------*/
+
+@media (min-width: 1200px){
+
+  .explore-home-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

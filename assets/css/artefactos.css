@@ -1,0 +1,158 @@
+/*-----------------------------------*\
+  #ARTEFACTOS
+  mobile-first
+\*-----------------------------------*/
+
+.artefactos{
+  padding-top: 130px;
+  padding-bottom: var(--section-space);
+  background-color: var(--primario);
+}
+
+.artefactos-header{
+  margin-bottom: 32px;
+}
+
+.artefactos-title{
+  margin-bottom: 12px;
+  line-height: var(--lineHeight-2);
+}
+
+.artefactos-text{
+  color: var(--davys-grey);
+  max-width: 62ch;
+}
+
+/* Grid */
+.artefactos-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.artefactos-item{
+  width: 100%;
+}
+
+.artefactos-card{
+  display: grid;
+  gap: 10px;
+  color: inherit;
+}
+
+/* Imagen */
+.artefactos-frame{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: var(--white);
+  border: 1px solid var(--black-alpha-15);
+}
+
+.artefactos-img,
+.artefactos-img-hover{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    opacity var(--transition-2),
+    transform var(--transition-2);
+  will-change: opacity, transform;
+}
+
+.artefactos-img{
+  opacity: 1;
+  z-index: 1;
+}
+
+.artefactos-img-hover{
+  opacity: 0;
+  z-index: 2;
+}
+
+.artefactos-card.is-hovered .artefactos-img-hover,
+.artefactos-card:is(:hover, :focus-visible, :focus-within) .artefactos-img-hover{
+  opacity: 1;
+}
+
+.artefactos-card.is-hovered .artefactos-img,
+.artefactos-card:is(:hover, :focus-visible, :focus-within) .artefactos-img,
+.artefactos-card.is-hovered .artefactos-img-hover,
+.artefactos-card:is(:hover, :focus-visible, :focus-within) .artefactos-img-hover{
+  transform: scale(1.03);
+}
+
+/* Texto */
+.artefactos-meta{
+  padding-top: 2px;
+}
+
+.artefactos-card-title{
+  margin: 0;
+  color: var(--davys-grey);
+  transition: color var(--transition-1);
+}
+
+.artefactos-card-sub{
+  display: none;
+}
+
+/* Hover / focus */
+.artefactos-card:is(:hover, :focus-visible, :focus-within) .artefactos-card-title,
+.artefactos-card.is-hovered .artefactos-card-title{
+  color: var(--primario2);
+}
+
+.artefactos-card:focus-visible{
+  outline: 2px dotted var(--primario2);
+  outline-offset: 6px;
+}
+
+
+/*-----------------------------------*\
+  #TABLET
+\*-----------------------------------*/
+
+@media (min-width: 768px){
+
+  .artefactos-header{
+    margin-bottom: 36px;
+  }
+
+  .artefactos-text{
+    max-width: 70%;
+  }
+
+  .artefactos-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
+
+/*-----------------------------------*\
+  #DESKTOP
+\*-----------------------------------*/
+
+@media (min-width: 1200px){
+
+  .artefactos{
+    padding-top: 150px;
+  }
+
+  .artefactos-header{
+    margin-bottom: 42px;
+  }
+
+  .artefactos-text{
+    max-width: 58ch;
+  }
+
+  .artefactos-grid{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
