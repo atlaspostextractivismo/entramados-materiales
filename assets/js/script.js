@@ -616,3 +616,68 @@ if (header && backTopBtn) {
     card.appendChild(hoverImg);
   });
 })();
+
+/**
+ * MEMBER MODAL
+ */
+(function () {
+  const modal = document.querySelector("[data-member-modal]");
+  if (!modal) return;
+
+  const imgEl = modal.querySelector("[data-member-modal-img]");
+  const nameEl = modal.querySelector("[data-member-modal-name]");
+  const roleEl = modal.querySelector("[data-member-modal-role]");
+  const bioEl = modal.querySelector("[data-member-modal-bio]");
+  const closeBtn = modal.querySelector("[data-member-close]");
+
+  if (!imgEl || !nameEl || !roleEl || !bioEl || !closeBtn) return;
+
+  const open = (trigger) => {
+    const name = trigger.dataset.memberName || "";
+    const role = trigger.dataset.memberRole || "";
+    const bio = trigger.dataset.memberBio || "";
+    const image = trigger.dataset.memberImage || "";
+
+    imgEl.src = image;
+    imgEl.alt = name;
+    nameEl.textContent = name;
+    roleEl.textContent = role;
+    bioEl.textContent = bio;
+
+    modal.hidden = false;
+    document.body.classList.add("member-modal-open");
+  };
+
+  const close = () => {
+    modal.hidden = true;
+    imgEl.src = "";
+    imgEl.alt = "";
+    nameEl.textContent = "";
+    roleEl.textContent = "";
+    bioEl.textContent = "";
+    document.body.classList.remove("member-modal-open");
+  };
+
+  document.addEventListener("click", (e) => {
+    const trigger = e.target.closest("[data-member-open]");
+    if (trigger) {
+      open(trigger);
+      return;
+    }
+
+    if (e.target.closest("[data-member-close]")) {
+      close();
+      return;
+    }
+
+    if (e.target === modal) {
+      close();
+    }
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) {
+      close();
+    }
+  });
+})();
