@@ -195,6 +195,10 @@ if (header && backTopBtn) {
   });
 })();
 
+/**
+ * TIMELINE 
+ */
+
 (function () {
   const blocks = document.querySelectorAll("[data-timeline]");
   if (!blocks.length) return;
@@ -202,7 +206,7 @@ if (header && backTopBtn) {
   const updateOne = (block) => {
     const wrap = block.querySelector(".timeline-wrap");
     const rail = block.querySelector(".timeline-rail");
-    const steps = block.querySelectorAll(".timeline-step[data-step]");
+    const steps = Array.from(block.querySelectorAll(".timeline-step[data-step]"));
     if (!wrap || !rail || !steps.length) return;
 
     const fromKey = block.dataset.from;
@@ -211,6 +215,18 @@ if (header && backTopBtn) {
     const fromEl = block.querySelector(`.timeline-step[data-step="${fromKey}"]`);
     const toEl = block.querySelector(`.timeline-step[data-step="${toKey}"]`);
     if (!fromEl || !toEl) return;
+
+    const fromIndex = steps.findIndex((step) => step.dataset.step === fromKey);
+    const toIndex = steps.findIndex((step) => step.dataset.step === toKey);
+
+    if (fromIndex === -1 || toIndex === -1) return;
+
+    const start = Math.min(fromIndex, toIndex);
+    const end = Math.max(fromIndex, toIndex);
+
+    steps.forEach((step, index) => {
+      step.classList.toggle("is-in-range", index >= start && index <= end);
+    });
 
     const wrapRect = wrap.getBoundingClientRect();
     const a = fromEl.getBoundingClientRect();
