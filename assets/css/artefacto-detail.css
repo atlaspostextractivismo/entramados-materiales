@@ -246,3 +246,21 @@
     right: 32px;
   }
 }
+
+.artefacto-linked{
+  display: grid;
+  gap: 12px;
+}
+
+.artefacto-linked-title{
+  margin: 0;
+}
+
+.artefacto-linked-list{
+  display: grid;
+  gap: 10px;
+}
+
+.artefacto-linked-item{
+  max-width: max-content;
+}
