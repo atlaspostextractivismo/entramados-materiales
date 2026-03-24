@@ -372,6 +372,15 @@
   line-height: var(--lineHeight-3);
 }
 
+@media (max-width: 480px){
+  .marco-caption{
+    font-size: 1.3rem;
+    line-height: 1.15;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+}
+
 .marco-overlay{
   position: absolute;
   inset: 0;
@@ -404,7 +413,7 @@
   }
 
   .marco-caption{
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     line-height: 1.2em;
   }
 }
