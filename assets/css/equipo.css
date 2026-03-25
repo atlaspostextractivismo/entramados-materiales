@@ -270,7 +270,6 @@ body.member-modal-open{
 .member-modal-bio{
   margin: 0;
   color: var(--white);
-  font-size: var(--fontSize-body-4);
 }
 
 
