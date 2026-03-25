@@ -627,14 +627,16 @@ if (header && backTopBtn) {
   const imgEl = modal.querySelector("[data-member-modal-img]");
   const nameEl = modal.querySelector("[data-member-modal-name]");
   const roleEl = modal.querySelector("[data-member-modal-role]");
+  const studiesEl = modal.querySelector("[data-member-modal-studies]");
   const bioEl = modal.querySelector("[data-member-modal-bio]");
   const closeBtn = modal.querySelector("[data-member-close]");
 
-  if (!imgEl || !nameEl || !roleEl || !bioEl || !closeBtn) return;
+  if (!imgEl || !nameEl || !roleEl || !studiesEl || !bioEl || !closeBtn) return;
 
   const open = (trigger) => {
     const name = trigger.dataset.memberName || "";
     const role = trigger.dataset.memberRole || "";
+    const studies = trigger.dataset.memberStudies || "";
     const bio = trigger.dataset.memberBio || "";
     const image = trigger.dataset.memberImage || "";
 
@@ -642,6 +644,7 @@ if (header && backTopBtn) {
     imgEl.alt = name;
     nameEl.textContent = name;
     roleEl.textContent = role;
+    studiesEl.textContent = studies;
     bioEl.textContent = bio;
 
     modal.hidden = false;
@@ -654,6 +657,7 @@ if (header && backTopBtn) {
     imgEl.alt = "";
     nameEl.textContent = "";
     roleEl.textContent = "";
+    studiesEl.textContent = "";
     bioEl.textContent = "";
     document.body.classList.remove("member-modal-open");
   };

@@ -174,21 +174,11 @@ body.member-modal-open{
 .member-modal{
   position: fixed;
   inset: 0;
-  background: hsla(0,0%,0%,0.85);
+  background: hsla(0,0%,0%,0.90);
   z-index: 9999;
   display: grid;
   place-items: center;
   padding: 18px 14px;
-}
-
-.member-modal-dialog{
-  position: relative;
-  width: min(960px, 92vw);
-  max-height: 86vh;
-  overflow: auto;
-  padding: 24px;
-  display: grid;
-  gap: 20px;
 }
 
 .member-modal-close{
@@ -199,28 +189,55 @@ body.member-modal-open{
   height: 40px;
   display: grid;
   place-items: center;
-  color: var(--davys-grey);
-  border: 1px dotted var(--davys-grey);
+  color: var(--white);
+  border: 1px dotted var(--white);
   border-radius: 50%;
   background: transparent;
+  z-index: 10000;
 }
 
 .member-modal-close:is(:hover, :focus-visible){
-  background: var(--davys-grey);
-  color: var(--white);
+  background: var(--white);
+  color: var(--black);
+}
+
+.member-modal-dialog{
+  position: relative;
+  width: min(var(--site-max-width), calc(100vw - (var(--gutter) * 2)));
+  max-height: 86vh;
+  overflow: auto;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  background: transparent;
 }
 
 .member-modal-grid{
   display: grid;
   gap: 18px;
+  align-items: start;
+}
+
+.member-modal-grid{
+  display: grid;
+  gap: 18px;
+  align-items: start;
 }
 
 .member-modal-media{
-  width: 100%;
+  width: min(160px, 58vw);
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--white);
   border: 1px solid var(--black-alpha-15);
+  margin-inline: 0;
+  justify-self: start;
+}
+
+.member-modal-copy{
+  max-width: 70ch;
+  margin-inline: 0;
+  justify-self: start;
 }
 
 .member-modal-media img{
@@ -229,21 +246,31 @@ body.member-modal-open{
   object-fit: cover;
 }
 
+.member-modal-copy{
+  max-width: 70ch;
+  margin-inline: auto;
+}
+
 .member-modal-name{
-  margin: 0 0 6px 0;
+  margin: 0 0 8px 0;
   color: var(--white);
 }
 
 .member-modal-role{
-  margin-bottom: 12px;
+  margin: 0 0 6px 0;
+  color: var(--white);
+  font-weight: var(--weight-bold);
+}
+
+.member-modal-studies{
+  margin: 0 0 14px 0;
   color: var(--white);
 }
 
 .member-modal-bio{
+  margin: 0;
   color: var(--white);
 }
-
-
 
 
 /*-----------------------------------*\
@@ -260,15 +287,21 @@ body.member-modal-open{
     gap: 30px 150px;
   }
 
-  .member-modal-dialog{
-    padding: 28px;
+  .member-modal-grid{
+    gap: 22px;
   }
 
-  .member-modal-grid{
-    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
-    gap: 24px;
-    align-items: start;
-  }
+  .member-modal-media{
+  width: min(200px, 28vw);
+  margin-inline: 0;
+  justify-self: start;
+}
+
+  .member-modal-copy{
+  max-width: 100ch;
+  margin-inline: 0;
+  justify-self: start;
+}
 }
 
 @media (min-width: 1200px){
@@ -294,26 +327,46 @@ body.member-modal-open{
     width: 170px;
     height: 170px;
   }
+
+  .member-modal-grid{
+  grid-template-columns: minmax(0, 1fr) 760px;
+  grid-template-areas: "copy media";
+  gap: 48px;
+  align-items: start;
+}
+
+  .member-modal-media{
+  grid-area: media;
+  width: 320px;
+  margin-inline: 0;
+  justify-self: center;
+}
+
+  .member-modal-copy{
+  grid-area: copy;
+  max-width: 100ch;
+  margin-inline: 0;
+  justify-self: start;
+}
+}
+
+
+/*-----------------------------------*\
+  #CENTER ONLY SOME TEAMS IN DESKTOP
+\*-----------------------------------*/
+
+@media (min-width: 1200px){
+  .team-grid--center-desktop{
+    justify-self: center;
+  }
+
+  .team-grid--1.team-grid--center-desktop{
+    justify-self: center;
+  }
 }
 
 
 /* Ajuste opcional para close del menú */
 .navbar .close-btn{
   color: var(--black);
-}
-
-@media (min-width: 1200px){
-  .team-grid{
-    justify-self: end;
-  }
-
-  .team-grid--center-desktop{
-    justify-self: center;
-  }
-}
-
-@media (min-width: 1200px){
-  .team-grid--1.team-grid--center-desktop{
-    justify-self: center;
-  }
 }
