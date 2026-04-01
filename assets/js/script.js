@@ -685,3 +685,207 @@ if (header && backTopBtn) {
     }
   });
 })();
+
+/**
+ * CLOTHES HOTSPOTS + LIGHTBOX
+ * Requiere en HTML:
+ * - [data-clothes]
+ * - [data-clothes-base]
+ * - [data-clothes-hover]
+ * - botones [data-clothes-hotspot]
+ * - lightbox [data-clothes-lightbox]
+ */
+(function () {
+  const root = document.querySelector("[data-clothes]");
+  if (!root) return;
+
+  const frame = root.querySelector(".clothes-frame");
+  const baseImg = root.querySelector("[data-clothes-base]");
+  const hoverImg = root.querySelector("[data-clothes-hover]");
+  const hotspots = root.querySelectorAll("[data-clothes-hotspot]");
+
+  const lightbox = document.querySelector("[data-clothes-lightbox]");
+  const lightboxImg = lightbox?.querySelector("[data-clothes-lightbox-img]");
+  const lightboxTitle = lightbox?.querySelector("[data-clothes-lightbox-title]");
+  const lightboxSubtitle = lightbox?.querySelector("[data-clothes-lightbox-subtitle]");
+  const lightboxClose = lightbox?.querySelector("[data-clothes-lightbox-close]");
+
+  if (!frame || !baseImg || !hoverImg || !hotspots.length || !lightbox || !lightboxImg || !lightboxTitle || !lightboxSubtitle || !lightboxClose) return;
+
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const defaultHoverSrc = hoverImg.getAttribute("src") || "";
+
+  const preload = (src) => {
+    if (!src) return;
+    const img = new Image();
+    img.src = src;
+  };
+
+  preload(defaultHoverSrc);
+
+  hotspots.forEach((hotspot) => {
+    preload(hotspot.dataset.hotspotHover);
+    preload(hotspot.dataset.hotspotLightboxImage);
+  });
+
+  const setHoverImage = (src) => {
+    if (!src) return;
+    hoverImg.src = src;
+    frame.classList.add("is-hovering");
+  };
+
+  const resetHoverImage = () => {
+    hoverImg.src = defaultHoverSrc;
+    frame.classList.remove("is-hovering");
+  };
+
+  if (canHover) {
+    hotspots.forEach((hotspot) => {
+      const hoverSrc = hotspot.dataset.hotspotHover;
+
+      hotspot.addEventListener("mouseenter", () => {
+        setHoverImage(hoverSrc);
+      });
+
+      hotspot.addEventListener("mouseleave", () => {
+        resetHoverImage();
+      });
+
+      hotspot.addEventListener("focus", () => {
+        setHoverImage(hoverSrc);
+      });
+
+      hotspot.addEventListener("blur", () => {
+        resetHoverImage();
+      });
+    });
+  }
+
+  const openLightbox = ({ image = "", title = "", subtitle = "" }) => {
+    lightboxImg.src = image;
+    lightboxImg.alt = title || "Detalle del taller";
+    lightboxTitle.textContent = title || "";
+    lightboxSubtitle.textContent = subtitle || "";
+    lightbox.hidden = false;
+    document.body.classList.add("member-modal-open");
+  };
+
+  const closeLightbox = () => {
+    lightbox.hidden = true;
+    lightboxImg.src = "";
+    lightboxImg.alt = "";
+    lightboxTitle.textContent = "";
+    lightboxSubtitle.textContent = "";
+    document.body.classList.remove("member-modal-open");
+  };
+
+  hotspots.forEach((hotspot) => {
+    hotspot.addEventListener("click", () => {
+      openLightbox({
+        image: hotspot.dataset.hotspotLightboxImage || hotspot.dataset.hotspotHover || hoverImg.src || baseImg.src,
+        title: hotspot.dataset.hotspotTitle || "",
+        subtitle: hotspot.dataset.hotspotSubtitle || ""
+      });
+    });
+  });
+
+  lightboxClose.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !lightbox.hidden) closeLightbox();
+  });
+
+  // expone para la galería
+  window.__openTallerLightbox = openLightbox;
+})();
+
+
+/**
+ * GALERÍA - hover swap + lightbox
+ * Requiere en HTML:
+ * - imagen base dentro de .galeria-item
+ * - opcional: data-gallery-hover
+ * - opcional: data-gallery-lightbox
+ * - opcional: data-gallery-title
+ * - opcional: data-gallery-subtitle
+ *
+ * Si no hay data-gallery-hover, no hace swap.
+ * Si no hay data-gallery-lightbox, abre la misma imagen visible.
+ */
+(function () {
+  const items = document.querySelectorAll(".talleres-galeria .galeria-item");
+  if (!items.length) return;
+
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const openLightbox = window.__openTallerLightbox;
+
+  items.forEach((item) => {
+    const baseImg = item.querySelector("img");
+    if (!baseImg) return;
+
+    const hoverSrc = baseImg.dataset.galleryHover;
+    const lightboxSrc = baseImg.dataset.galleryLightbox;
+    const title = baseImg.dataset.galleryTitle || "";
+    const subtitle = baseImg.dataset.gallerySubtitle || "";
+
+    // crea imagen hover solo si existe data-gallery-hover
+    if (hoverSrc && !item.querySelector(".galeria-hover-img")) {
+      const hoverImg = document.createElement("img");
+      hoverImg.className = "img-cover galeria-hover-img";
+      hoverImg.src = hoverSrc;
+      hoverImg.alt = "";
+      hoverImg.setAttribute("aria-hidden", "true");
+      hoverImg.setAttribute("data-lightbox", "");
+      hoverImg.loading = "lazy";
+      hoverImg.decoding = "async";
+
+      preloadGallery(hoverSrc);
+      item.appendChild(hoverImg);
+    }
+
+    if (lightboxSrc) preloadGallery(lightboxSrc);
+
+    if (canHover && hoverSrc) {
+      item.addEventListener("mouseenter", () => {
+        item.classList.add("is-hovering");
+      });
+
+      item.addEventListener("mouseleave", () => {
+        item.classList.remove("is-hovering");
+      });
+
+      item.addEventListener("focusin", () => {
+        item.classList.add("is-hovering");
+      });
+
+      item.addEventListener("focusout", () => {
+        requestAnimationFrame(() => {
+          if (!item.contains(document.activeElement)) {
+            item.classList.remove("is-hovering");
+          }
+        });
+      });
+    }
+
+    item.addEventListener("click", () => {
+      if (!openLightbox) return;
+
+      const visibleHover = item.classList.contains("is-hovering") && hoverSrc;
+      openLightbox({
+        image: lightboxSrc || (visibleHover ? hoverSrc : (baseImg.currentSrc || baseImg.src)),
+        title,
+        subtitle
+      });
+    });
+  });
+
+  function preloadGallery(src) {
+    if (!src) return;
+    const img = new Image();
+    img.src = src;
+  }
+})();
