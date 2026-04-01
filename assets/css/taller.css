@@ -578,9 +578,9 @@
 
   /* Grupo D: D10 ancho + D11 + D12 verticales */
   .talleres-galeria .grupo-d{
-    grid-template-columns: 2.3fr 1fr 1fr;
+    grid-template-columns: 0.4fr 1fr 1fr;
     grid-template-areas: "d10 d11 d12";
-    --h-d-row: clamp(170px, 14vw, 230px);
+    --h-d-row: clamp(300px, 14vw, 230px);
   }
 
   .talleres-galeria .grupo-d .i10,
