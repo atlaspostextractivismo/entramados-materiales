@@ -167,7 +167,7 @@ body.member-modal-open{
 .member-modal{
   position: fixed;
   inset: 0;
-  background: hsl(262.105, 49%, 30%,0.95);
+  background: hsl(262, 47%, 15%, 0.90);
   z-index: 9999;
   display: grid;
   place-items: center;
