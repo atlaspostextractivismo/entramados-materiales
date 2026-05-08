@@ -24,26 +24,15 @@
    * COLORS
    */
 
-  --primario: hsl(37, 100%, 97%);
-  --primario2: hsl(207, 100%, 34%);
-  --primario3: hsl(305, 100%, 46%);
-
+  --primario: hsl(37, 100%, 97%, 0.85);
+  --primario2: hsl(331.744, 80%, 58%);
+  --primario2var: hsl(332, 68%, 30%);
+  --primario3: hsl(262.105, 49%, 30%);
+  
+  --secundario1: hsl(207.209, 100%, 34%);
 
   --quick-silver: hsla(0, 0%, 65%, 1);
   --davys-grey: rgb(58, 58, 57);
-
-  --verde-prim: #95BF8F;
-  --naranjo-prim: #ED7052;
-  --verde-osc-prim: #45503B;
-  --cyan-prim: #17798C;
-  --morado-prim: #59325D;
-
-
-  --verde-sec: #CADFC7;
-  --naranjo-sec: #F6B7A8;
-  --verde-osc-sec: #A2A79D;
-  --cyan-sec: #8BBCC5;
-  --morado-sec: #AC98AE;
 
   --smoky-black-1: hsla(40, 12%, 5%, 1);
   --smoky-black-2: hsla(30, 8%, 5%, 1);
@@ -79,11 +68,11 @@
   --fontSize-headline-1: calc(2.0rem + 1.6vw); /* título de sección grande */
   --fontSize-headline-2: calc(1.7rem + 1.0vw); /* subtítulo de sección */
   --fontSize-title-1: calc(1.6rem + 0.6vw); /* título de bloque/card importante */
-  --fontSize-title-2: 2.3rem; /* título fijo (h2/h3 estable) */
-  --fontSize-title-3: 2.0rem; /* título fijo secundario */
+  --fontSize-title-2: 2.4rem; /* título fijo (h2/h3 estable) */
+  --fontSize-title-3: 1.9rem; /* título fijo secundario */
   --fontSize-title-4: 1.7rem; /* título pequeño (NO fluido) */
-  --fontSize-body-1: 1.8rem; /* párrafo grande */
-  --fontSize-body-2: 1.6rem; /* párrafo normal */
+  --fontSize-body-1: 1.9rem; /* párrafo grande */
+  --fontSize-body-2: 1.8rem; /* párrafo normal */
   --fontSize-body-3: 1.7rem; /* párrafo chico */
   --fontSize-body-4: 1.3rem; /* caption / metadata */
   --fontSize-body-5: 1.2rem; /* microtexto  */
@@ -137,7 +126,7 @@
   --transition-2: 500ms ease;
   --transition-3: 1000ms ease;
 
- --action-color: var(--primario2);
+ --action-color: var(--primario3);
 --action-color-hover: var(--primario2);
 --action-font-size: 1.4rem;
 --action-letter-spacing: 0.04em;
@@ -227,7 +216,7 @@ html {
 
 body {
   background-color: var(--primario);
-  color: var(--davys-grey);
+  color: var(--primario3);
   font-family: var(--fontFamily-cormorant);
   font-size: var(--fontSize-body-4);
   font-weight: var(--weight-regular);
@@ -255,7 +244,7 @@ body.nav-active { overflow: hidden; }
 \*-----------------------------------*/
 
 .display-1 {
-  color: var(--black);
+  color: var(--primario2);
   font-family: var(--fontFamily-gabriela);
   font-weight: var(--weight-regular);
   line-height: var(--lineHeight-2);
@@ -263,11 +252,16 @@ body.nav-active { overflow: hidden; }
 
 .headline-1,
 .headline-2,
-.title-1,
+.title-1 {
+  color: var(--primario2);
+  font-family: var(--fontFamily-gabriela);
+  font-weight: var(--weight-regular);
+  line-height: var(--lineHeight-2);
+}
 .title-2,
 .title-3,
 .title-4 {
-  color: var(--davys-grey);
+  color: var(--primario3);
   font-family: var(--fontFamily-gabriela);
   font-weight: var(--weight-regular);
   line-height: var(--lineHeight-2);
@@ -651,7 +645,7 @@ body.nav-active { overflow: hidden; }
 .nav-open-btn .line {
   width: 30px;
   height: 2px;
-  background-color: var(--black);
+  background-color: var(--primario2);
   margin-block: 4px;
   transform-origin: left;
   animation: none;
@@ -825,7 +819,6 @@ body.nav-active { overflow: hidden; }
 
 .footer-left p {
   font-size: var(--fontSize-body-3);
-  color: var(--smoky-black-2);
   margin: 0;
 }
 
@@ -916,7 +909,7 @@ body.nav-active { overflow: hidden; }
 
     --fontSize-body-1: 2.4rem;
     --fontSize-body-2: 2rem;
-
+    --fontSize-body-3: 1.8rem;
   }
 
 

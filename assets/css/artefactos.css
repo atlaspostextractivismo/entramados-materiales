@@ -19,7 +19,7 @@
 }
 
 .artefactos-text{
-  color: var(--davys-grey);
+  
   max-width: 62ch;
 }
 
@@ -92,7 +92,6 @@
 
 .artefactos-card-title{
   margin: 0;
-  color: var(--davys-grey);
   transition: color var(--transition-1);
 }
 

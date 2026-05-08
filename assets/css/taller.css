@@ -26,7 +26,6 @@
 }
 
 .taller-entrada-text{
-  color: var(--davys-grey);
   max-width: 62ch;
 }
 
@@ -104,7 +103,6 @@
 }
 
 .clothes-text{
-  color: var(--davys-grey);
   line-height: var(--lineHeight-5);
   max-width: none;
 }
@@ -341,7 +339,6 @@
 }
 
 .talleres-galeria-text{
-  color: var(--davys-grey);
   max-width: none;
   width: 100%;
   line-height: var(--lineHeight-5);

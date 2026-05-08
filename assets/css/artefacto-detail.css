@@ -68,7 +68,6 @@
   padding: 6px 10px;
   background-color: var(--white);
   border: 1px solid var(--black-alpha-15);
-  color: var(--davys-grey);
   font-size: var(--fontSize-label-2);
   line-height: 1.2;
   white-space: nowrap;
@@ -114,7 +113,6 @@
   padding-block: 12px;
   padding-right: 70px;
   border-bottom: 1px solid var(--black-alpha-15);
-  color: var(--davys-grey);
   font-size: var(--fontSize-body-2);
   line-height: var(--lineHeight-4);
   position: relative;
@@ -132,7 +130,7 @@
 .timeline-step.is-in-range{
   font-size: calc(var(--fontSize-body-2) + 0.2rem);
   font-weight: var(--weight-bold);
-  color: hsl(305, 100%, 46%);
+  color: var(--primario2);
 }
 
 .timeline-rail{
@@ -140,7 +138,7 @@
   right: 28px;
   top: var(--y1, 0px);
   height: calc(var(--y2, 0px) - var(--y1, 0px));
-  border-left: 3px dotted hsl(305, 100%, 46%);
+  border-left: 3px dotted var(--primario2);
   z-index: 2;
   pointer-events: none;
 }
@@ -153,7 +151,7 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background-color: hsl(305, 100%, 46%);
+  background-color: var(--primario2);
 }
 
 .timeline-rail::before{
@@ -181,12 +179,8 @@
 
 .artefacto-block-title{
   margin: 0;
-  color: var(--davys-grey);
 }
 
-.artefacto-block-body{
-  color: var(--davys-grey);
-}
 
 @media (min-width: 768px){
   .artefacto-grid{

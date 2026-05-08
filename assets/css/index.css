@@ -13,6 +13,7 @@
   align-items: center;
 }
 
+
 .hero-home .hero-bg{
   position: absolute;
   inset: 0;
@@ -87,7 +88,6 @@
 
 .hero-card-text{
   margin-bottom: 14px;
-  color: var(--davys-grey);
 }
 
 /* Botón negro simple (como en tu Figma) */
@@ -355,7 +355,6 @@
 
 .explore-card-title{
   margin-top: 14px;
-  color: var(--davys-grey);
   transition: color var(--transition-1);
 }
 
