@@ -1,0 +1,243 @@
+/*-----------------------------------*\
+  #ARTESANAS
+  mobile-first
+\*-----------------------------------*/
+
+.artesanas{
+  padding-top: 130px;
+  padding-bottom: var(--section-space);
+  background-color: var(--primario);
+}
+
+.artesanas-header{
+  margin-bottom: 42px;
+}
+
+.artesanas-title{
+  margin-bottom: 12px;
+  line-height: var(--lineHeight-2);
+}
+
+.artesanas-intro{
+  max-width: 68ch;
+}
+
+/* Lista general */
+.artesanas-list{
+  display: grid;
+  gap: 56px;
+}
+
+/* Card mobile/tablet */
+.artesana-card{
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  grid-template-areas:
+    "media links"
+    "info info";
+  column-gap: 34px;
+  row-gap: 34px;
+  align-items: center;
+}
+
+.artesana-media{
+  grid-area: media;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: var(--white);
+  border: 1px solid var(--black-alpha-15);
+}
+
+.artesana-img{
+  transition: transform var(--transition-2);
+}
+
+.artesana-card:is(:hover, :focus-within) .artesana-img{
+  transform: scale(1.03);
+}
+
+.artesana-info{
+  grid-area: info;
+}
+
+.artesana-name{
+  margin-bottom: 2px;
+}
+
+.artesana-data{
+  display: grid;
+  gap: 0;
+  margin-bottom: 28px;
+  font-size: var(--fontSize-body-2);
+  line-height: var(--lineHeight-6);
+}
+
+.artesana-data strong{
+  font-weight: var(--weight-bold);
+}
+
+.artesana-bio{
+  max-width: 62ch;
+}
+
+/* Links artefactos */
+.artesana-links{
+  grid-area: links;
+  display: grid;
+  gap: 12px;
+  align-content: center;
+  justify-items: start;
+}
+
+.artesana-link{
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  padding: 0 0 var(--action-underline-offset) 0;
+  background: none;
+  color: var(--action-color);
+  font-family: var(--fontFamily-cormorant);
+  font-size: var(--action-font-size);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--action-letter-spacing);
+  line-height: 1.2;
+  max-width: max-content;
+  transition: color var(--transition-1);
+}
+
+.artesana-link::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--action-underline-weight);
+  background-image: repeating-linear-gradient(
+    to right,
+    currentColor 0,
+    currentColor var(--action-stitch-dot),
+    transparent var(--action-stitch-dot),
+    transparent calc(var(--action-stitch-dot) + var(--action-stitch-gap))
+  );
+  background-repeat: repeat-x;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: stitchReveal var(--action-stitch-speed) steps(var(--action-stitch-steps)) infinite alternate;
+  opacity: 0.95;
+}
+
+.artesana-link:is(:hover, :focus-visible){
+  color: var(--action-color-hover);
+}
+
+.artesana-link:focus-visible{
+  outline: none;
+}
+
+.artesana-link:is(:hover, :focus-visible){
+  color: var(--primario2);
+}
+
+.artesana-link:focus-visible{
+  outline: none;
+}
+
+
+/*-----------------------------------*\
+  #TABLET
+  mismo comportamiento que mobile
+\*-----------------------------------*/
+
+@media (min-width: 768px){
+
+  .artesanas-header{
+    margin-bottom: 48px;
+  }
+
+  .artesanas-intro{
+    max-width: 76ch;
+  }
+
+  .artesanas-list{
+    gap: 64px;
+  }
+
+  .artesana-card{
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    column-gap: 70px;
+    row-gap: 36px;
+  }
+
+  .artesana-media{
+    max-width: 280px;
+  }
+}
+
+
+/*-----------------------------------*\
+  #DESKTOP
+\*-----------------------------------*/
+/*-----------------------------------*\
+  #DESKTOP
+\*-----------------------------------*/
+
+@media (min-width: 1200px){
+
+  .artesanas{
+    padding-top: 150px;
+  }
+
+  .artesanas-header{
+    max-width: 720px;
+    margin-bottom: 42px;
+  }
+
+  .artesanas-title{
+    font-size: var(--fontSize-display-1);
+    margin-bottom: 18px;
+  }
+
+  .artesanas-intro{
+    max-width: 72ch;
+  }
+
+  .artesanas-list{
+    gap: 70px;
+  }
+
+  .artesana-card{
+    width: 100%;
+    max-width: none;
+    grid-template-columns: 260px minmax(0, 1fr) max-content;
+    grid-template-areas: "media info links";
+    column-gap: 40px;
+    row-gap: 0;
+    align-items: center;
+  }
+
+  .artesana-media{
+    max-width: none;
+  }
+
+  .artesana-info{
+    max-width: none;
+  }
+
+  .artesana-data{
+    margin-bottom: 28px;
+  }
+
+  .artesana-bio{
+    max-width: 82ch;
+  }
+
+  .artesana-links{
+    justify-self: end;
+    align-content: center;
+    justify-items: start;
+    gap: 14px;
+  }
+}
